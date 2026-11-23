@@ -1,6 +1,7 @@
 // Drives the live app in three browser profiles and captures every frame for the demo video.
 //   node record.mjs setup   sign the three accounts in; Alice's sign-in is captured as a clip
 //   node record.mjs take    run buy -> transfer -> enter -> admit and capture it
+//   node record.mjs scanshot   retake the 4-scan still with the entry code in focus
 // Sign-in codes are read from files so a person or another tool can supply them:
 // the script writes need-<name>, waits for ready-<name>, then waits for code-<name>.
 import { execFileSync } from "node:child_process";
@@ -353,8 +354,63 @@ async function tidy() {
   }
 }
 
+/**
+ * Retakes the 4-scan still with the organiser's entry code in focus. The live page moves on the
+ * moment it reads a code, so the focused camera view is laid over the viewfinder instead, under
+ * the scanner's own frame marks. Sends no transaction.
+ */
+async function scanShot() {
+  const organiser = await open("organiser", "desktop");
+  let bob;
+  try {
+    await organiser.page.goto(BASE + "/organiser");
+    const code = organiser.page.locator('img[alt="Entry QR code for this event"]');
+    await code.waitFor();
+    await sleep(800);
+    // The camera view is the organiser's entry-code card on its own dark colour, centred on the code.
+    const card = code.locator("xpath=../..");
+    const qr = await code.boundingBox();
+    const box = await card.boundingBox();
+    const scale = 1.5; // the organiser page's device scale factor
+    const side = Math.round(qr.width * scale * 1.8);
+    const trim = 20; // device pixels: drops the card's rounded corners so it blends into the backdrop
+    const shot = sharp(await card.screenshot());
+    const meta = await shot.metadata();
+    const padded = await shot
+      .extract({ left: trim, top: trim, width: meta.width - 2 * trim, height: meta.height - 2 * trim })
+      .extend({ top: side, bottom: side, left: side, right: side, background: "#0e1512" })
+      .png()
+      .toBuffer();
+    const centre = (start, size, origin) => Math.round((start - origin + size / 2) * scale - trim + side / 2);
+    const view = await sharp(padded)
+      .extract({ left: centre(qr.x, qr.width, box.x), top: centre(qr.y, qr.height, box.y), width: side, height: side })
+      .png()
+      .toBuffer();
+
+    // Chrome's test pattern stands in for the camera. It holds no code, so the page stays put.
+    bob = await open("bob", "phone", ["--use-fake-device-for-media-stream"]);
+    await bob.page.goto(BASE + "/enter");
+    await bob.page.locator(".scan-region-highlight").waitFor();
+    await sleep(800);
+    await bob.page.evaluate((src) => {
+      const still = new Image();
+      still.src = src;
+      still.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
+      document.querySelector("video").after(still);
+      return still.decode();
+    }, "data:image/png;base64," + view.toString("base64"));
+    const file = path.join(OUT, "shots", "4-scan.png");
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    await bob.page.screenshot({ path: file });
+    console.log("wrote", file);
+  } finally {
+    for (const actor of [organiser, bob]) if (actor) await actor.context.close();
+  }
+}
+
 const mode = process.argv[2];
 if (mode === "setup") await setup();
 else if (mode === "take") await take();
 else if (mode === "tidy") await tidy();
-else (console.error("Usage: node record.mjs <setup|take|tidy>"), process.exit(1));
+else if (mode === "scanshot") await scanShot();
+else (console.error("Usage: node record.mjs <setup|take|tidy|scanshot>"), process.exit(1));

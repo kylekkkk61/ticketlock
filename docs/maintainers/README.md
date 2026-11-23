@@ -79,7 +79,9 @@ node render.mjs          # writes out/ticketlock-login.mp4, -demo.mp4, -full.mp4
 `setup` asks for each sign-in code through files in `/tmp/ticketlock-otp`: it writes
 `need-<name>`, waits for `ready-<name>`, then reads the six digits from `code-<name>`. `take` can
 be repeated; if one is interrupted, `node record.mjs tidy` uses up leftover tickets first. Run
-`take` with `TICKETLOCK_SHOTS=1` to refresh the screenshots used by the diagrams.
+`take` with `TICKETLOCK_SHOTS=1` to refresh the screenshots used by the diagrams, then
+`node record.mjs scanshot` to retake the scanning screen with the entry code in focus. Both write
+to `out/shots/`; copy the ones you want into `docs/diagrams/src/shots/`.
 
 The phone is a desktop browser with a phone-sized page, and its camera is fed a generated clip
 that closes in on the organiser's real entry code. The app, the signatures and the transactions
