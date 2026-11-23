@@ -1,0 +1,19 @@
+[Unit]
+Description=TicketLock demo app (Next.js server and relayer worker)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ticketlock
+WorkingDirectory=/opt/ticketlock-demo/web
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node scripts/next.mjs start
+Restart=always
+RestartSec=3
+# The worker finishes or persists its current transaction before exit.
+TimeoutStopSec=60
+# Node reports 143 when it ends on SIGTERM; that is a clean stop here.
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

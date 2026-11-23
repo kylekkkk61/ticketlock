@@ -1,0 +1,17 @@
+[Unit]
+Description=Cloudflare Tunnel for ticketlock.kylewu.me
+After=network-online.target ticketlock-app.service
+Wants=network-online.target
+
+[Service]
+User=ticketlock
+# TUNNEL_ID is kept on the host, in /etc/cloudflared/tunnel.env.
+EnvironmentFile=/etc/cloudflared/tunnel.env
+# Only one machine may run this tunnel at a time: two connectors would split visitors
+# between two separate databases and two relayer workers.
+ExecStart=/usr/bin/cloudflared tunnel --no-autoupdate run --url http://localhost:3000 --credentials-file /etc/cloudflared/ticketlock-demo.json ${TUNNEL_ID}
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
