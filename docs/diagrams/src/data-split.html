@@ -1,6 +1,7 @@
 
 <div class="pad big">
 <div><div class="eyebrow">TicketLock · data</div><h1>What is stored where</h1><div class="lead">Personal details stay off the blockchain. The facts people need to trust without asking us go on it.</div></div>
+<div style="zoom:1.16">
 <div style="display:flex;gap:26px;margin-top:26px;align-items:stretch">
   <div class="box" style="flex:1"><div class="row between"><div class="t">Sign-in provider</div>{{logo:privy:20:#111111}}</div><div class="s">A specialist service, so we never handle passwords or wallet keys.</div><ul class="list" style="margin-top:14px"><li><b>Email</b> verified with a one-time code</li><li><b>Wallet key</b> created for the account, held securely</li><li><b>Sessions</b> who is signed in</li></ul></div>
   <div class="box" style="flex:1"><div class="row between"><div class="t">TicketLock server</div></div><div class="s">An ordinary database. Useful, private, and not the source of truth.</div><ul class="list" style="margin-top:14px"><li><b>Account link</b> which email goes with which wallet address</li><li><b>Orders</b> simulated checkouts and their result</li><li><b>Entry requests</b> waiting for staff, with their short codes</li><li><b>Queue</b> transactions being sent, so none is sent twice</li></ul></div>
@@ -10,6 +11,7 @@
   <div class="soft" style="flex:1"><div class="name">Never on the blockchain</div><div class="d">Names, email addresses and payment details. A ticket is tied to a wallet address, which on its own identifies nobody.</div></div>
   <div class="soft" style="flex:1"><div class="name">If our server went offline</div><div class="d">Every ticket and its status would still be readable by anyone. New purchases and relayed actions would pause until it returned.</div></div>
   <div class="soft" style="flex:1"><div class="name">What still relies on trust</div><div class="d">The platform issues tickets and runs the relayer, Privy guards the wallets, and the organiser decides whom to admit.</div></div>
+</div>
 </div>
 <div class="foot"><div><div class="eyebrow">Rule of thumb</div><div class="s">If losing or changing a fact would let someone cheat, it lives on-chain. If it is only for convenience, it lives in our database.</div></div></div>
 </div>
