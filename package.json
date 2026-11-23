@@ -1,0 +1,21 @@
+{
+  "name": "ticketlock-demo",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "contracts:compile": "pnpm --filter @ticketlock/contracts compile",
+    "contracts:test": "pnpm --filter @ticketlock/contracts test",
+    "chain": "pnpm --filter @ticketlock/contracts node",
+    "dev": "pnpm --filter @ticketlock/web dev",
+    "build": "pnpm --filter @ticketlock/web build",
+    "start": "pnpm --filter @ticketlock/web start",
+    "verify-ticket": "node contracts/scripts/verify-ticket.mjs",
+    "web:test": "pnpm --filter @ticketlock/web test",
+    "tunnel": "cloudflared tunnel run --url http://localhost:3000 ticketlock-demo",
+    "account-address": "pnpm --filter @ticketlock/web account-address"
+  }
+}
