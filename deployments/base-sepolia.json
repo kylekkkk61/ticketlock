@@ -1,0 +1,11 @@
+{
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "contract": "0xbd2983C53d4209ae7BE64b4dF0f5fD2Cd1Ed4255",
+  "deploymentBlock": 62333924,
+  "deploymentTx": "0x543ceae7dd3e7d559d4616863728a67cb6caa39ad67d7fb0e758ee955b47e807",
+  "issuer": "0xAd7D9bb51e5f5c538Cc657EeD6Edc293DdB28e5C",
+  "eventId": 1,
+  "organiser": "0xb6aDA36D0F6088CE64669807aD7bA8Bf400316aa",
+  "capacity": 100
+}
