@@ -7,8 +7,9 @@ can check who owns a ticket and whether it has been used, and nobody, including 
 change that record. For the customer it works like an ordinary ticketing site: sign in with
 email, buy, send a ticket to a friend, scan a code at the door.
 
-This repository holds the working demo built for a university blockchain venture project: the
-smart contract, the web app, the brand assets and the documentation.
+This repository holds the working demo built as the group venture project for the *Blockchain and
+Distributed Ledger Technologies* module of the MSc Financial Technology at Warwick Business
+School: the smart contract, the web app, the brand assets and the documentation.
 
 | | |
 | --- | --- |
@@ -114,9 +115,10 @@ safeguards the wallets, and the organiser still decides whom to admit.
 
 ## Credits
 
-Built by the TicketLock team as a university course project. The contract, web app, diagrams and
-documentation were produced with substantial help from AI coding tools, directed and reviewed by
-the team.
+Built by the TicketLock team as the group project for the *Blockchain and Distributed Ledger
+Technologies* module, MSc Financial Technology, Warwick Business School. The contract, web app,
+diagrams and documentation were produced with substantial help from AI coding tools, directed and
+reviewed by the team.
 
 Technology logos in the diagrams identify the tools used and belong to their owners; see the
 [diagrams README](docs/diagrams/README.md#third-party-marks). Released under the [MIT licence](LICENSE).
