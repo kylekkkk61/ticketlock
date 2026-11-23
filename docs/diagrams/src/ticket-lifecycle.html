@@ -1,0 +1,27 @@
+
+<div class="pad big">
+<div><div class="eyebrow">TicketLock · ticket lifecycle</div><h1>A ticket has two states, and only moves forward</h1><div class="lead">The contract records one fact about use: available or used. There is no way back.</div></div>
+<div style="display:flex;align-items:center;margin-top:130px">
+  <div class="box" style="width:330px;height:230px;flex:none"><div class="t">Not issued</div><div class="s">No ticket exists yet.</div><div class="s">Capacity is fixed when the event is created.</div></div>
+  <div style="flex:1;text-align:center;position:relative;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center"><div class="mono">issueTicket</div><svg width="100%" height="20" style="margin:8px 0"><line x1="6" y1="10" x2="96%" y2="10" stroke="#111" stroke-width="2.5"/><path d="M-12 -7L0 0L-12 7" fill="none" stroke="#111" stroke-width="2.5" transform="translate(0 10)" style="transform:translate(calc(100% - 8px),10px)"/></svg><div class="d" style="max-width:190px">the platform, after checkout</div></div>
+  <div style="position:relative;flex:none">
+    <div class="box" style="width:330px;height:230px;flex:none"><div class="t">Available</div><div class="s">Owned by one account.</div><div class="s">Can be transferred or presented for entry.</div><div class="s">Counter starts at 0.</div></div>
+    <div style="position:absolute;left:0;right:0;top:-92px;text-align:center"><div class="mono">transferWithPermit</div><div class="d" style="white-space:nowrap">the owner signs · new owner · counter +1</div><svg width="190" height="34" viewBox="0 0 190 34" fill="none" stroke="#111" stroke-width="2.5" style="margin-top:4px"><path d="M40 32C40 4 150 4 150 32"/><path d="M143 20L150 32L160 23"/></svg></div>
+  </div>
+  <div style="flex:1;text-align:center;position:relative;height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center"><div class="mono">checkIn</div><svg width="100%" height="20" style="margin:8px 0"><line x1="6" y1="10" x2="96%" y2="10" stroke="#111" stroke-width="2.5"/><path d="M-12 -7L0 0L-12 7" fill="none" stroke="#111" stroke-width="2.5" transform="translate(0 10)" style="transform:translate(calc(100% - 8px),10px)"/></svg><div class="d" style="max-width:190px">owner and organiser both sign</div></div>
+  <div class="dark" style="width:330px;height:230px;flex:none"><div class="t">Used</div><div class="s">Entry time recorded by the network.</div><div class="s">Stays with the holder as a record.</div><div class="s">No transfer, no second entry, no reset.</div></div>
+</div>
+<div style="display:flex;gap:26px;margin-top:60px">
+  <div class="soft" style="flex:1"><div class="name">Why a counter?</div><div class="d">A signature approves one action at one counter value. When the ticket moves, the counter rises and every earlier signature is void, even if the ticket later returns to the same person.</div></div>
+  <div class="soft" style="flex:1"><div class="name">Which happens first wins</div><div class="d">If a transfer and an entry request are both waiting, the first one the network processes succeeds and the other is refused automatically.</div></div>
+  <div class="soft" style="flex:1"><div class="name">Nothing is deleted</div><div class="d">Used tickets are not destroyed. Each step stays on the public record with its time, its signers and its transaction.</div></div>
+</div>
+<div class="foot" style="display:block">
+  <div class="eyebrow">A real ticket · number 6 on Base Sepolia · 23 November 2026</div>
+  <div style="display:flex;gap:40px;margin-top:8px">
+    <div style="flex:1"><div class="name">13:02:06 · Issued</div><div class="d">network fee 0.0000015 ETH, paid by the platform</div></div>
+    <div style="flex:1"><div class="name">13:02:20 · Transferred</div><div class="d">network fee 0.0000006 ETH, paid by the platform</div></div>
+    <div style="flex:1"><div class="name">13:02:56 · Checked in</div><div class="d">network fee 0.0000004 ETH, paid by the platform</div></div>
+  </div>
+</div>
+</div>

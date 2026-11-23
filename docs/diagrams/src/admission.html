@@ -1,0 +1,52 @@
+
+<div class="pad">
+<div><div class="eyebrow">TicketLock · admission</div><h1>One entry, two signatures, one transaction</h1><div class="lead">A ticket is used only when its holder and the event's organiser approve the same request. Neither can do it alone.</div></div>
+<div style="display:flex;gap:32px;margin:24px 0 28px;align-items:stretch;flex:1">
+  <div style="width:500px;display:flex;flex-direction:column;gap:18px">
+    <div class="box" style="flex:1;display:flex;gap:18px;padding:18px">
+      <div class="phone" style="width:150px;height:236px;border-width:5px;border-radius:18px"><img src="{{shot:5-waiting}}"></div>
+      <div><div class="row"><div class="num">1</div><div class="name" style="font-size:20px;font-weight:800">Customer confirms</div></div><div class="d" style="margin-top:10px">Scans the door code and presses <i>Confirm entry</i>. The phone signs an entry permit and shows a short code.</div><div class="d" style="margin-top:8px;color:#111;font-weight:600">The ticket is still unused.</div></div>
+    </div>
+    <div class="box" style="flex:1;display:flex;gap:18px;padding:18px">
+      <div style="flex:none;width:214px;height:236px;border:1.5px solid #cfcfcf;border-radius:10px;overflow:hidden"><img src="{{shot:5-organiser-request}}" style="width:300px;margin:-44px 0 0 -10px;display:block"></div>
+      <div><div class="row"><div class="num">2</div><div class="name" style="font-size:20px;font-weight:800">Staff admit</div></div><div class="d" style="margin-top:10px">The same code appears on the organiser's screen. Staff match it to the person and press <i>Admit</i>.</div><div class="d" style="margin-top:8px;color:#111;font-weight:600">The organiser signs the same permit.</div></div>
+    </div>
+  </div>
+
+  <div style="width:520px;display:flex;flex-direction:column;gap:18px">
+    <div class="box" style="padding:20px 22px">
+      <div class="eyebrow">The entry permit</div>
+      <ul class="list" style="margin-top:8px">
+        <li><b>Ticket</b> which ticket, for which event</li>
+        <li><b>Holder</b> the account that owns it now</li>
+        <li><b>Gate</b> the event's organiser</li>
+        <li><b>Counter</b> the ticket's current number</li>
+        <li><b>Expires</b> two minutes after it was made</li>
+      </ul>
+      <div style="margin-top:12px;display:flex;gap:12px">
+        <div class="soft" style="flex:1;padding:10px 12px"><div class="eyebrow" style="font-size:12px">Signature 1</div><div class="name" style="font-size:16px">Holder ✓</div></div>
+        <div class="soft" style="flex:1;padding:10px 12px"><div class="eyebrow" style="font-size:12px">Signature 2</div><div class="name" style="font-size:16px">Organiser ✓</div></div>
+      </div>
+    </div>
+    <div class="soft" style="flex:1;padding:18px 20px"><div class="row"><div class="num">3</div><div class="name" style="font-size:20px;font-weight:800">The relayer sends it</div></div><div class="d" style="margin-top:10px">TicketLock's server puts the permit and both signatures into one transaction and pays the fee. It cannot change a single signed field: the signatures would stop matching.</div></div>
+  </div>
+
+  <div class="dark" style="flex:1;display:flex;flex-direction:column">
+    <div class="row"><div class="num">4</div><div class="t" style="font-size:22px">The contract checks</div></div>
+    <ul class="list" style="margin-top:12px">
+      <li>The ticket exists and belongs to this event</li>
+      <li>It has not been used</li>
+      <li>The first signature is from its current owner</li>
+      <li>The second is from this event's organiser</li>
+      <li>Owner and organiser are different accounts</li>
+      <li>The counter matches and the permit has not expired</li>
+    </ul>
+    <div class="card" style="margin-top:auto"><div class="row"><div class="num" style="background:#111;color:#fff">5</div><div class="name" style="font-size:20px;font-weight:800">Used, with the time recorded</div></div><div class="d" style="margin-top:8px">Final. The ticket stays with its holder as a record and can never be transferred or admitted again.</div></div>
+  </div>
+</div>
+<div class="foot">
+  <div><div class="eyebrow">A copied door code</div><div class="s">Does nothing. It names the event and carries no authority.</div></div>
+  <div><div class="eyebrow">Staff acting alone</div><div class="s">Cannot use up a ticket. The holder's signature is required.</div></div>
+  <div><div class="eyebrow">The platform</div><div class="s">Pays and delivers. It cannot forge either signature.</div></div>
+</div>
+</div>

@@ -1,0 +1,57 @@
+
+<div class="abs" style="left:64px;top:44px"><div><div class="eyebrow">TicketLock · system architecture</div><h1>What runs where</h1></div></div>
+<div class="abs col" style="left:64px;top:170px">People</div>
+<div class="abs col" style="left:470px;top:170px">TicketLock app · off-chain</div>
+<div class="abs col" style="left:1330px;top:170px">Blockchain · on-chain</div>
+
+<div class="abs box" style="left:64px;top:250px;width:300px;height:190px"><div class="t">Customer</div><div class="s">Phone browser.<br>Signs in with email, buys, transfers, scans the door code.</div></div>
+<div class="abs box" style="left:64px;top:610px;width:300px;height:190px"><div class="t">Organiser</div><div class="s">Laptop at the door.<br>Shows the entry code and admits each request.</div></div>
+
+<div class="abs" style="left:470px;top:206px;width:720px;height:700px;border:2px dashed #9a9a9a;border-radius:20px"></div>
+<div class="abs box" style="left:500px;top:232px;width:660px;height:272px">
+  <div class="row between"><div class="t">Web app</div><div class="row"><span class="tag">{{icon:nextdotjs:18:#111111}}Next.js</span><span class="tag">{{icon:react:18:#111111}}React</span></div></div>
+  <div class="s">One site for customers and the organiser. Every action ends with a confirm button.</div>
+  <div class="row" style="gap:14px;margin-top:16px;align-items:stretch">
+    <div class="soft" style="flex:1"><div class="row between"><div class="name">Sign-in and wallet</div>{{logo:privy:17:#111111}}</div><div class="d">An email code signs you in. Privy creates and guards a built-in wallet for the account.</div></div>
+    <div class="soft" style="flex:1"><div class="name">Signing</div><div class="d">Confirming creates a digital signature. No wallet app and no fees for the user.</div></div>
+  </div>
+</div>
+<div class="abs box" style="left:500px;top:560px;width:660px;height:320px">
+  <div class="row between"><div class="t">Server</div><div class="row"><span class="tag">{{icon:nodedotjs:18:#111111}}Node.js</span><span class="tag">{{icon:typescript:16:#111111}}TypeScript</span></div></div>
+  <div class="s">Checks every signature before anything reaches the blockchain.</div>
+  <div class="row" style="gap:14px;margin-top:16px;align-items:stretch">
+    <div class="soft" style="flex:1"><div class="row between"><div class="name">Accounts and requests</div>{{icon:sqlite:18:#555555}}</div><div class="d">Which email owns which wallet, and requests in progress. Stored in SQLite.</div></div>
+    <div class="soft" style="flex:1"><div class="name">Relayer</div><div class="d">Sends each transaction and pays the network fee, one at a time. Built with viem.</div></div>
+  </div>
+  <div class="row" style="margin-top:16px;font-size:15.5px;color:#555">{{icon:cloudflare:20:#555555}}<span>Runs on a Microsoft Azure virtual machine, reached through a Cloudflare Tunnel.</span></div>
+</div>
+
+<div class="abs dark" style="left:1330px;top:206px;width:526px;height:700px">
+  <div class="row between"><div class="t">Base Sepolia</div>{{logo:base:30:#ffffff}}</div>
+  <div class="s">A public Ethereum layer-2 test network. Nobody, TicketLock included, can edit its records.</div>
+  <div class="card" style="margin-top:18px">
+    <div class="row between"><div class="name" style="font-size:21px;font-weight:800">TicketLock smart contract</div><div class="row">{{icon:solidity:20:#111111}}{{icon:openzeppelin:20:#111111}}</div></div>
+    <div class="d">Each ticket is an NFT (ERC-721). The contract is both the rule book and the record.</div>
+    <ul class="list" style="margin-top:10px"><li><b>Events</b> organiser and capacity</li><li><b>Owner</b> of every ticket</li><li><b>Used or not</b> and the time of entry</li><li><b>Counter</b> that cancels old signatures</li></ul>
+  </div>
+  <div class="eyebrow" style="color:#9a9a9a;margin-top:20px">Rules it enforces</div>
+  <ul class="list" style="margin-top:6px"><li>Only the platform can issue tickets</li><li>A ticket moves only with its owner's signature</li><li>Entry needs the owner and the organiser, once</li></ul>
+  <div class="s" style="position:absolute;left:28px;right:28px;bottom:24px;font-size:15.5px">Anyone can read all of it with a block explorer or our independent verifier, without asking TicketLock.</div>
+</div>
+
+<svg class="abs" style="left:0;top:0" width="1920" height="1080" fill="none" stroke="#111" stroke-width="2.5">
+  <defs><marker id="a" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1 1L10 6L1 11" fill="none" stroke="#111" stroke-width="2"/></marker></defs>
+  <path d="M364 345H494" marker-end="url(#a)"/><path d="M364 705H430V420H494" marker-end="url(#a)"/>
+  <path d="M830 504V554" marker-end="url(#a)"/>
+  <path d="M1160 680H1324" marker-end="url(#a)"/>
+  <path d="M1324 800H1166" stroke-dasharray="7 7" marker-end="url(#a)"/>
+</svg>
+<div class="abs lab" style="left:846px;top:518px">signed requests</div>
+<div class="abs lab" style="left:1196px;top:648px">transactions</div>
+<div class="abs" style="left:1196px;top:690px;font-size:13.5px;color:#555;width:128px;line-height:1.25">fee paid by TicketLock, sent through Alchemy</div>
+<div class="abs lab" style="left:1218px;top:810px">reads</div>
+
+<div class="abs foot" style="left:64px;top:940px;width:1792px">
+  <div><div class="eyebrow">Kept off-chain</div><div class="s">Who you are (email) and what is in progress. Convenient, and replaceable.</div></div>
+  <div><div class="eyebrow">Kept on-chain</div><div class="s">Who owns each ticket, whether it was used, and the full history. Public and permanent.</div></div>
+</div>
